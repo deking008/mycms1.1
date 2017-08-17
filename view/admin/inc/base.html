@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="keywords" content="admin, dashboard, bootstrap, template, flat, modern, theme, responsive, fluid, retina, backend, html5, css, css3">
+    <meta name="description" content="">
+    <meta name="author" content="ThemeBucket">
+    <link rel="shortcut icon" href="#" type="image/png">
+    <title>zui</title>
+    <link href="/static/admin/zui/css/zui.min.css" rel="stylesheet">
+    <link href="/static/admin/css/style.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+  <script src="/static/admin/js/html5shiv.js"></script>
+  <script src="/static/admin/js/respond.min.js"></script>
+  <![endif]-->
+  {% block style %}{% endblock %}
+</head>
+
+<body class="sticky-header">
+    <section>
+        <!-- left side start-->
+            {% include "./aside.html" %}
+        <!-- left side end-->
+        <!-- main content start-->
+        <div class="main-content">
+            <!-- header section start-->
+                {% include "./header.html" %}
+            <!-- header section end-->
+            
+            <!--body wrapper start-->
+            <div class="wrapper">
+                {% block content %}{% endblock %}
+            </div>
+            <!--body wrapper end-->
+        </div>
+        <!-- main content end-->
+    </section>
+    <!-- Placed js at the end of the document so the pages load faster -->
+    <script src="/static/admin/js/jquery.min.js"></script>
+    <script src="/static/admin/zui/js/zui.min.js"></script>
+    
+    <!--common scripts for all pages-->
+    <script src="/static/admin/js/scripts.js"></script>
+    {% block script %}{% endblock %}
+</body>
+
+</html>
