@@ -23,7 +23,8 @@
                         <div class="row" style="margin-bottom: 20px;">
                             <div class="col-lg-6">
                                 <div class="btn-group">
-                                    <a id="editable-sample_new" href="/admin/user/adduser" data-toggle="ajaxModal"  class="btn btn-primary">
+                                    <a id="editable-sample_new" href="/admin/user/adduser" data-toggle="ajaxModal"
+                                       class="btn btn-primary">
                                         添加用户 <i class="fa fa-plus"></i>
                                     </a>
                                     <button class="btn btn-primary">
@@ -46,22 +47,54 @@
                         </div>
                         <table class="table table-striped table-hover table-bordered">
                             <thead>
-                                <tr>
-                                    <th>
-                                      <input type="checkbox">
-                                    </th>
-                                    <th>uid</th>
-                                    <th>用户名</th>
-                                    <th>邮箱</th>
-                                    <th>用户组</th>
-                                    <th>注册ip</th>
-                                    <th>最后登录</th>
-                                    <th>金钱总数</th>
-                                    <th>积分点数</th>
-                                    <th>状态</th>
-                                    <th class="text-center">操作</th>
-                                </tr>
+                            <tr>
+                                <th>
+                                    <input type="checkbox">
+                                </th>
+                                <th>uid</th>
+                                <th>用户名</th>
+                                <th>邮箱</th>
+                                <th>用户组</th>
+                                <th>注册ip</th>
+                                <th>最后登录</th>
+                                <th>金钱总数</th>
+                                <th>积分点数</th>
+                                <th>状态</th>
+                                <th class="text-center">操作</th>
+                            </tr>
                             </thead>
+                            <tbody>
+                            {% for item in list %}
+                            <tr>
+                                <td>
+                                    <input type="checkbox">
+                                </td>
+                                <td>{{ item.id }}</td>
+                                <td>{{ item.username }}</td>
+                                <td>{{ item.email }}</td>
+                                <td>用户组</td>
+                                <td>{{item.reg_ip|int2ip}}</td>
+                                <td>{{item.last_login_time | moment('YYYY-MM-DD HH:mm:ss')}}</td>
+                                <td>{{item.amount}}</td>
+                                <td>{{item.score}}</td>
+                                <td>{{item.suatus}}
+                                    {%if item.id|in_Array(controller.config('user_administrator'))%}{%else%}
+                                    <a href="/admin/user/setstatus/ids/{{item.id}}/status/{{1-item.status}}/model/member" class="active ajax-get">
+                                        <i class="icon icon-check text-success {%if item.status %}text-active{%else%}text{%endif%}"></i>
+                                        <i class="icon icon-remove text-danger {%if item.status %}text{%else%}text-active{%endif%}"></i>
+                                    </a>
+                                    {%endif%}
+                                </td>
+                                <td class="text-center">
+                                    <a href="/admin/user/edituser/?id={{item.id}}" class="text-info" data-toggle="ajaxModal">编辑</a>
+                                    <a href="/admin/user/recharge/?ids={{item.id}}" class="text-info" data-toggle="ajaxModal">充值</a>
+                                    {%if item.id|in_Array(controller.config('user_administrator'))%}{%else%}
+                                    <a href="/admin/user/userdel/?ids={{item.id}}" class="confirm ajax-get text-info">删除</a>
+                                    {%endif%}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
 
                         </table>
                         <div class="row">

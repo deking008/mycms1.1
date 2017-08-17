@@ -4,7 +4,7 @@ Author: ThemeBucket
 -------------------------------------------*/
 
 @import url('../fonts/css/font-awesome.min.css');
-
+@import url('./app.css');
 body {
     background: #424f63;
     font-family:"PingFang SC","Hiragino Sans GB","Microsoft YaHei";
@@ -2196,6 +2196,11 @@ ul.user-states li {
 }
 
 .dataTables_paginate.paging_bootstrap.pagination li a {
+    color: #797979;
+    padding: 5px 10px;
+    display: inline-block;
+}
+.dataTables_paginate.paging_bootstrap.pagination li span {
     color: #797979;
     padding: 5px 10px;
     display: inline-block;
