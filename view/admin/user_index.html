@@ -20,48 +20,27 @@
                 </header>
                 <div class="panel-body">
                     <div>
-                        <div class="clearfix">
-                            <div class="btn-group">
-                                <a id="editable-sample_new" href="/admin/user/adduser" data-toggle="ajaxModal"  class="btn btn-primary">
-                                    添加用户 <i class="fa fa-plus"></i>
-                                </a>
-                                <button class="btn btn-primary">
-                                    启用
-                                </button>
-                                <button class="btn btn-primary">
-                                    禁用
-                                </button>
-                                <a href="/admin/user/userdel" class="btn btn-primary ajax-post" target-form="ids">
-                                    删除
-                                </a>
-                            </div>
-                            <div class="btn-group pull-right">
-                                <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">Tools <i class="fa fa-angle-down"></i>
-                                </button>
-                                <ul class="dropdown-menu pull-right">
-                                    <li><a href="#">Print</a></li>
-                                    <li><a href="#">Save as PDF</a></li>
-                                    <li><a href="#">Export to Excel</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="row">
+                        <div class="row" style="margin-bottom: 20px;">
                             <div class="col-lg-6">
-                                <div id="editable-sample_length" class="dataTables_length">
-                                    <label>
-                                        <select size="1" name="editable-sample_length" aria-controls="editable-sample" class="form-control xsmall">
-                                            <option value="5" selected="selected">5</option>
-                                            <option value="15">15</option>
-                                            <option value="20">20</option>
-                                            <option value="-1">All</option>
-                                        </select> 每页多少条</label>
+                                <div class="btn-group">
+                                    <a id="editable-sample_new" href="/admin/user/adduser" data-toggle="ajaxModal"  class="btn btn-primary">
+                                        添加用户 <i class="fa fa-plus"></i>
+                                    </a>
+                                    <button class="btn btn-primary">
+                                        启用
+                                    </button>
+                                    <button class="btn btn-primary">
+                                        禁用
+                                    </button>
+                                    <a href="/admin/user/userdel" class="btn btn-primary ajax-post" target-form="ids">
+                                        删除
+                                    </a>
                                 </div>
                             </div>
                             <div class="col-lg-6">
-                                <div class="dataTables_filter" id="editable-sample_filter">
-                                    <label>Search:
-                                        <input type="text" aria-controls="editable-sample" class="form-control medium">
-                                    </label>
+                                <div class="input-group pull-right" style="width: 300px;">
+                                    <input type="text" placeholder="请输入用户名" class="form-control medium">
+                                    <span class="input-group-addon">搜索</span>
                                 </div>
                             </div>
                         </div>
@@ -83,31 +62,7 @@
                                     <th class="text-center">操作</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {% for item in list %}
-                                  {%set group=item.groupid|get_member_group%}
-                                <tr>
-                                    <td>
-                                      <input class="ids" type="checkbox" name="ids" value="{{item.id}}"/>
-                                    </td>
-                                    <td>{{item.id}}</td>
-                                    <td><a href="/admin/user/showuser/id/{{item.id}}" data-toggle="ajaxModal">{{item.username}} <i class="icon icon-zoom-in"></i></a></td>
-                                    <td>{{item.email}}</td>
-                                    <td>{{group.name}}</td>
-                                    <td>{{item.reg_ip | int2ip}}</td>
-                                    <td>{{item.last_login_time | moment('YYYY-MM-DD HH:mm:ss')}}</td>
-                                    <td>{{item.amount}}</td>
-                                    <td>{{item.score}}</td>
-                                    <td>状态</td>
-                                    <td class="text-center">
-                                    <a href="/admin/user/edituser/id/{{item.id}}" class="text-info" data-toggle="ajaxModal">编辑</a>
-                                <a href="/admin/user/recharge/ids/{{item.id}}" class="text-info" data-toggle="ajaxModal">充值</a>
-                                <a href="/admin/user/userdel?ids={{item.id}}" class="text-info confirm ajax-get">删除</a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                                
-                            </tbody>
+
                         </table>
                         <div class="row">
                             <div class="col-lg-12">
