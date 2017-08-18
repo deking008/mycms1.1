@@ -59,12 +59,13 @@
                                 <th>最后登录</th>
                                 <th>金钱总数</th>
                                 <th>积分点数</th>
-                                <th>状态</th>
+                                <th class="text-center">状态</th>
                                 <th class="text-center">操作</th>
                             </tr>
                             </thead>
                             <tbody>
                             {% for item in list %}
+                            {%set group=item.groupid|get_member_group%}
                             <tr>
                                 <td>
                                     <input type="checkbox">
@@ -72,16 +73,16 @@
                                 <td>{{ item.id }}</td>
                                 <td>{{ item.username }}</td>
                                 <td>{{ item.email }}</td>
-                                <td>用户组</td>
+                                <td>{{ group.name }}</td>
                                 <td>{{item.reg_ip|int2ip}}</td>
                                 <td>{{item.last_login_time | moment('YYYY-MM-DD HH:mm:ss')}}</td>
                                 <td>{{item.amount}}</td>
                                 <td>{{item.score}}</td>
-                                <td>{{item.suatus}}
+                                <td class="text-center">
                                     {%if item.id|in_Array(controller.config('user_administrator'))%}{%else%}
-                                    <a href="/admin/user/setstatus/ids/{{item.id}}/status/{{1-item.status}}/model/member" class="active ajax-get">
-                                        <i class="icon icon-check text-success {%if item.status %}text-active{%else%}text{%endif%}"></i>
-                                        <i class="icon icon-remove text-danger {%if item.status %}text{%else%}text-active{%endif%}"></i>
+                                    <a href="/admin/user/setstatus/?ids={{item.id}}&status={{1-item.status}}&model=member" class="active ajax-get" data-toggle="class">
+                                        <i class="fa fa-check text-success {%if item.status %}text-active{%else%}text{%endif%}"></i>
+                                        <i class="fa fa-times text-danger {%if item.status %}text{%else%}text-active{%endif%}"></i>
                                     </a>
                                     {%endif%}
                                 </td>
