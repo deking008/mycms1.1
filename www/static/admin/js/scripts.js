@@ -191,7 +191,6 @@
         }
         if ((target = $(this).attr('href')) || (target = $(this).attr('url'))) {
             $.get(target).success(function(data) {
-
                 if (data.errno == 0) {
                     new $.zui.Messager(data.data.name, {
                         type: 'success',
@@ -214,7 +213,6 @@
      * confirm,
      */
     function ajaxpost(e) {
-        e.preventDefault();
         var target, query, form;
         var target_form = $(this).attr('target-form');
         var that = this;
@@ -234,7 +232,7 @@
                 }
                 target = form.get(0).action;
                 query = form.serialize();
-                
+
             } else if (form.get(0).nodeName == 'INPUT' || form.get(0).nodeName == 'SELECT' || form.get(0).nodeName == 'TEXTAREA') {
                 form.each(function(k, v) {
                     if (v.type == 'checkbox' && v.checked == true) {
@@ -258,6 +256,7 @@
                     }
                 });
         }
+        return false;
     }
     $(document).on('click', '.ajax-post', ajaxpost);
 

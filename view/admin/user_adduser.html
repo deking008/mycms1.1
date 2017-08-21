@@ -161,5 +161,23 @@
     </form>
 </div><!-- /.modal-dialog -->
 <script>
-   
+    $(function () {
+
+        $('.time').datetimepicker({
+            format: 'yyyy-mm-dd hh:ii',
+            language:"zh-CN",
+            minView:2,
+            autoclose:true
+        });
+        //用户组选择
+        $("input[name='is_admin']").on("change",function () {
+            var val = $(this).val();
+            console.log(val);
+            if(val == 1){
+                $(".is_admin_group").removeClass('hide');
+            }else {
+                $(".is_admin_group").addClass('hide');
+            }
+        })
+    })
 </script>
