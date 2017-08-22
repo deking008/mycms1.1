@@ -5421,3 +5421,15 @@ textarea.parsley-error {
 .active > .auto .text-active {
     display: inline-block !important;
 }
+
+.header-tab{
+    position: fixed;
+    left:240px;
+    right:0;
+    top: 51px;
+    background-color: rgba(50,50,50,0.05);
+    height:50px;
+}
+.sticky-header.left-side-collapsed .header-tab{
+    left: 52px;
+}

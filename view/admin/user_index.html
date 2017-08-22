@@ -69,7 +69,7 @@
                             <tr>
                                 <td><label><input class="ids" type="checkbox" name="ids" value="{%if item.id|in_Array(controller.config('user_administrator'))%}{%else%}{{item.id}}{%endif%}" {%if item.id|in_Array(controller.config('user_administrator'))%}disabled="true"{%endif%}><i></i></label></td>
                                 <td>{{ item.id }}</td>
-                                <td>{{ item.username }}</td>
+                                <td><a hrhref="/d"> {{ item.username }} </a></td>
                                 <td>{{ item.email }}</td>
                                 <td>{{ group.name }}</td>
                                 <td>{{item.reg_ip|int2ip}}</td>
