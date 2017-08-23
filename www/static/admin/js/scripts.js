@@ -200,7 +200,7 @@
                         location.reload();
                     }, 1500);
                 } else {
-
+                    //
                 }
 
             });
@@ -238,23 +238,40 @@
                     if (v.type == 'checkbox' && v.checked == true) {
                         nead_confirm = true;
                     }
-                    query = form.serialize();
                 });
+                if ($(form).hasClass('sort')) {
+                    var arr = []
+                    form.each(function(k, v) {
+                        var obj = {};
+                        obj.id = $(v).attr('data-id');
+                        obj.sort = $(v).val();
+                        arr.push(obj);
+                    })
+                    query = { sort: JSON.stringify(arr) };
+                } else {
+                    query = form.serialize();
+                }
+                //query = form.serialize();
             }
 
             $.post(target, query).success(function(data) {
-                    if (data.errno == 0) {
-                        new $.zui.Messager(data.data.name, {
-                            type: 'success',
-                            time: 1500
-                        }).show();
-                        setTimeout(function() {
+                if (data.errno == 0) {
+                    new $.zui.Messager(data.data.name, {
+                        type: 'success',
+                        time: 1500
+                    }).show();
+                    setTimeout(function() {
+                        if(data.data.url){
+                            location.href=data.data.url;
+                        }else{
                             location.reload();
-                        }, 1500);
-                    } else {
-                        //else
-                    }
-                });
+                        }
+
+                    }, 1500);
+                } else {
+                    //else
+                }
+            });
         }
         return false;
     }
@@ -270,5 +287,6 @@
         $('tbody [type="checkbox"]', $table).prop('checked', $checked);
     });
 
-
+// 或者在初始化时指定
+    $('[data-toggle="tooltip"]').tooltip();
 })(jQuery);

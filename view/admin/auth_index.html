@@ -20,14 +20,14 @@
                     <div class="row" style="margin-bottom: 20px;">
                         <div class="col-lg-6">
                             <div class="btn-group">
-                                <a id="editable-sample_new" href="/admin/user/adduser" data-toggle="ajaxModal"
+                                <a id="editable-sample_new" href="/{{ctx.controller}}/adduser"
                                    class="btn btn-primary">
                                     添加会员组 <i class="fa fa-plus"></i>
                                 </a>
-                                <a href="/admin/user/userdel" class="btn btn-primary ajax-post" target-form="ids">
+                                <a href="/{{ctx.controller}}/deluser" class="btn btn-primary ajax-post" target-form="ids">
                                     删除
                                 </a>
-                                <a class="btn btn-primary ajax-post" target-form="sort" href="/{{ctx.controller}}/sort">
+                                <a class="btn btn-primary ajax-post" target-form="sort" href="/{{ctx.controller}}/sort/?type=1">
                                     排序
                                 </a>
                             </div>
@@ -61,7 +61,7 @@
                         <tbody>
                         {% for item in list %}
                         <tr>
-                            <td>{%if item.issystem !=1%}<label class="checkbox m-n i-checks"><input class="ids" type="checkbox" name="ids" value="{{item.groupid}}" ><i></i></label>{%endif%}</td>
+                            <td>{%if item.issystem !=1%} <input class="ids" type="checkbox" name="ids" value="{{item.groupid}}" > {%endif%}</td>
                             <td>{{item.groupid}}</td>
                             <td><input class="form-control form-control-text sort" value="{{item.sort}}" name="sort" data-id="{{item.groupid}}"/></td>
                             <td>{{item.name}}</td>
