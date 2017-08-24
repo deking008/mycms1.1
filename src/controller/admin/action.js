@@ -57,4 +57,52 @@ module.exports = class extends Base {
             }
         }
     }
+    /**
+     * 日志列表
+     * @returns {*}
+     */
+    async logAction(){
+        //获取列表数据
+        let map={}
+        map.status = ['>',-1];
+        let list = await this.model("action_log").where({'status':['>',-1]}).order("id DESC").page(this.get('page')).countSelect();
+        //console.log(list);
+        let html = this.pagination(list);
+        this.assign("pagerData",html);
+        for(let itme of list.data){
+            itme.action_id=await this.model("action").get_action(itme.action_id,"title");
+            itme.user_id = await this.model("member").get_nickname(itme.user_id);
+        }
+        this.assign("list",list.data);
+        this.meta_title = "行为日志";
+        return this.display();
+    }
+    /**
+     * 删除日志
+     */
+    async removeAction(){
+        let ids = this.param("ids");
+        think.isEmpty(ids)&& this.fail("参数错误");
+        let map={};
+        if(think.isArray(ids)){
+            map.id = ['IN',ids];
+        }else if(think.isNumberString(ids)){
+            map.id = ids;
+        }
+        let res = await this.model('action_log').where(map).delete();
+        if(res){
+            this.success({name:"删除成功！",url:"/admin/action/log"});
+        }else {
+            this.fail("删除失败！");
+        }
+    }
+    // 清楚日志
+    async clearAction(){
+        let res = await this.model('action_log').where('1=1').delete();
+        if(res){
+            this.success({name:'日志清空成功！',url:"/admin/action/log"});
+        }else {
+            this.fail("日志清空失败！");
+        }
+    }
 }

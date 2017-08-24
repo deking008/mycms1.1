@@ -148,8 +148,9 @@
 
 
     // tool tips
-
     $('.tooltips').tooltip();
+    // 或者在初始化时指定
+    $('[data-toggle="tooltip"]').tooltip();
 
     // popovers
 
@@ -160,6 +161,15 @@
     username=deking897&password=123456&repassword=123456&email=12412314%40qq.com&mobile=1342623423432&groupid=2&score=24&is_admin=1&role_id=2&vip=1&overduedate=2017-07-21+07%3A54
 
     */
+
+    //todo
+    $(".todo").click(function (e) {
+        e.preventDefault();
+        new $.zui.Messager('功能开发中，敬请期待...', {
+            type: 'info' // 定义颜色主题
+        }).show();
+        return;
+    })
 
     // ajax modal
     $(document).on('click', '[data-toggle="ajaxModal"]',
@@ -287,6 +297,5 @@
         $('tbody [type="checkbox"]', $table).prop('checked', $checked);
     });
 
-// 或者在初始化时指定
-    $('[data-toggle="tooltip"]').tooltip();
+
 })(jQuery);
